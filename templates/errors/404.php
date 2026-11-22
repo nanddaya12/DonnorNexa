@@ -1,0 +1,1 @@
+<section class="error-page"><h1>404</h1><h2>Page not found</h2><p><?= e($message ?? 'The page you asked for could not be found.') ?></p><a class="btn" href="<?= e(url('home')) ?>">Back to home</a></section>

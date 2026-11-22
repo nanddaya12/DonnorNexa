@@ -1,0 +1,15 @@
+# Logs & runtime artifacts
+logs/*.log
+logs/.last_expiry
+
+# Operating System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.tmp

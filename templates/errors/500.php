@@ -1,0 +1,1 @@
+<section class="error-page"><h1><?= (int) (http_response_code() ?: 500) ?></h1><h2>Something went wrong</h2><p><?= e($message ?? 'Something went wrong on our side. Please try again.') ?></p><a class="btn" href="<?= e(url('home')) ?>">Back to home</a></section>
