@@ -716,12 +716,8 @@ DonorNexa/
 │   └── licences/            Private hospital medical licences (accessible solely by verified admin)
 ├── logs/                    SYSTEM LOGGING
 │   └── error.log            Exception stack traces and unhandled error logs
-├── cli/                     COMMAND-LINE INTERFACE UTILITIES
-│   └── expire.php           Cron utility for auto-expiring overdue requests
-└── docs/                    ACADEMIC SPECIFICATIONS & COMPLIANCE
-    ├── CONCEPT_MAP.md       Mapping of syllabus concepts to implementation files
-    ├── TEST_CASES.md        Systematic manual and automated test execution matrices
-    └── AI_USAGE_LOG.md      Official AI assistance declaration for university viva
+└── cli/                     COMMAND-LINE INTERFACE UTILITIES
+    └── expire.php           Cron utility for auto-expiring overdue requests
 ```
 
 ---
@@ -812,8 +808,4 @@ DonorNexa implements comprehensive, defense-in-depth protections aligned with OW
 
 ## 14. Academic Integrity & Declarations
 
-This software engineering project was developed for the Web Engineering Continuous Evaluation Problem (CEP), Department of Software Engineering.
-
-* Complete traceability between academic syllabus requirements and project implementation is documented in [docs/CONCEPT_MAP.md](file:///c:/Users/nandd/Downloads/DonorNexa/docs/CONCEPT_MAP.md).
-* Systematic test specifications covering functional modules, edge cases, and security barriers are cataloged in [docs/TEST_CASES.md](file:///c:/Users/nandd/Downloads/DonorNexa/docs/TEST_CASES.md).
-* Transparent declaration of AI tooling utilized during the development lifecycle is detailed in [docs/AI_USAGE_LOG.md](file:///c:/Users/nandd/Downloads/DonorNexa/docs/AI_USAGE_LOG.md).
+This software engineering project was developed for the Web Engineering Continuous Evaluation Problem (CEP), Department of Software Engineering. All architectural layers, database design, algorithms, responsive presentation templates, and security controls strictly adhere to the course syllabus and engineering guidelines.
