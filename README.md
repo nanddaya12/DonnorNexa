@@ -12,14 +12,15 @@ DonorNexa is a production-grade, framework-free emergency blood-donor coordinati
 4. [UML Entity-Relationship Diagram (ERD)](#4-uml-entity-relationship-diagram-erd)
 5. [UML Class Diagram](#5-uml-class-diagram)
 6. [UML Sequence Diagram: Emergency Coordination Flow](#6-uml-sequence-diagram-emergency-coordination-flow)
-7. [State Machine Diagram: Request Lifecycle](#7-state-machine-diagram-request-lifecycle)
-8. [Installation & XAMPP Setup Guide](#8-installation--xampp-setup-guide)
-9. [Seed Data & Test Credentials](#9-seed-data--test-credentials)
-10. [Viva / Evaluation Demo Script](#10-viva--evaluation-demo-script)
-11. [Folder Structure & Architectural Decoupling](#11-folder-structure--architectural-decoupling)
-12. [Core Domain Engine & Algorithms](#12-core-domain-engine--algorithms)
-13. [Security Hardening & OWASP Compliance](#13-security-hardening--owasp-compliance)
-14. [Academic Integrity & Declarations](#14-academic-integrity--declarations)
+7. [UML State Machine Diagram: Request Lifecycle](#7-uml-state-machine-diagram-request-lifecycle)
+8. [UML Activity Diagram: Matching & Fulfillment Engine](#8-uml-activity-diagram-matching--fulfillment-engine)
+9. [Installation & XAMPP Setup Guide](#9-installation--xampp-setup-guide)
+10. [Seed Data & Test Credentials](#10-seed-data--test-credentials)
+11. [Viva / Evaluation Demo Script](#11-viva--evaluation-demo-script)
+12. [Folder Structure & Architectural Decoupling](#12-folder-structure--architectural-decoupling)
+13. [Core Domain Engine & Algorithms](#13-core-domain-engine--algorithms)
+14. [Security Hardening & OWASP Compliance](#14-security-hardening--owasp-compliance)
+15. [Academic Integrity & Declarations](#15-academic-integrity--declarations)
 
 ---
 
@@ -31,6 +32,8 @@ DonorNexa is a production-grade, framework-free emergency blood-donor coordinati
 * **Medical Privacy & Masked Contact Records**: Donor mobile numbers remain masked (`0300-*******`) until an eligible donor explicitly accepts a request. Contact reveal events are logged in the immutable audit trail.
 * **Institutional Trust Rating & Spam Mitigation**: Hospitals are evaluated with an institutional trust score (0-100). Frivolous cancellations trigger automatic trust deductions; trust scores below threshold prevent request posting. Maximum of 3 concurrent open Critical requests enforced via both application logic and database triggers.
 * **Automated Expiry & Cooldown Enforcement**: Background maintenance engine expires outdated requests and resets non-responsive notifications. Database trigger automatically enforces 90-day cooldown upon confirmed donation.
+* **Adaptive Dual Theme & Accessibility**: Native Light and Neutral Matte Dark mode toggle with persistent local preference, zero-neon high-contrast palettes, keyboard accessibility, and WCAG AA/AAA compliant text ratios across all devices.
+* **Pure Native Stack (Zero External Frameworks)**: Engineered 100% in pure PHP 8.1+, MySQL/MariaDB (InnoDB), vanilla ES6+ JavaScript, and hand-written CSS3 Grid/Flexbox without third-party frameworks like Bootstrap, Tailwind, or Laravel.
 
 ---
 
@@ -533,7 +536,7 @@ sequenceDiagram
 
 ---
 
-## 7. State Machine Diagram: Request Lifecycle
+## 7. UML State Machine Diagram: Request Lifecycle
 
 The lifecycle of each blood request progresses through well-defined finite states:
 
@@ -555,11 +558,75 @@ stateDiagram-v2
 
 ---
 
-## 8. Installation & XAMPP Setup Guide
+## 8. UML Activity Diagram: Matching & Fulfillment Engine
+
+The complete end-to-end activity flow—from hospital request creation and algorithmic candidate scoring, through anti-race-condition row locking and database triggers:
+
+```mermaid
+flowchart TD
+    Start(["Hospital Coordinator Initiates Blood Request"]) --> CheckAuth{"Is Hospital Verified & Trust Score >= 20?"}
+    CheckAuth -- "No" --> DenyAuth["Reject Request & Flash Authorization Error"]
+    CheckAuth -- "Yes" --> CheckCrit{"Is Urgency Level 'Critical'?"}
+
+    CheckCrit -- "Yes" --> CritCount{"Active Critical Requests < 3?"}
+    CritCount -- "No" --> DenyCrit["Reject: Maximum 3 Concurrent Critical Limit Reached"]
+    CritCount -- "Yes" --> InsertReq["Insert blood_requests record with status='open'"]
+    CheckCrit -- "No" --> InsertReq
+
+    InsertReq --> EvalUrgency{"Evaluate Urgency Multi-Tier Radius"}
+    EvalUrgency -- "Normal Urgency" --> PoolCity["Broadcast Pool: City Tier (Top N = 5 Donors)"]
+    EvalUrgency -- "Urgent Urgency" --> PoolProv["Broadcast Pool: Provincial Tier (Top 2N = 10 Donors)"]
+    EvalUrgency -- "Critical Urgency" --> PoolNat["Broadcast Pool: Nationwide Tier (Top 3N = 15 Donors)"]
+
+    PoolCity --> CompatFilter["Filter Relational Compatibility (blood_compatibility Matrix)"]
+    PoolProv --> CompatFilter
+    PoolNat --> CompatFilter
+
+    CompatFilter --> EligFilter["Filter Eligibility: Age 18-65, Weight >= 50kg, Rest Days >= 90"]
+    EligFilter --> ScoreEngine["Compute Deterministic Donor Score (Max 100 Points):<br>ABO Match (+40) + Geo (+25) + Rest (+20) + Response (+15)"]
+    ScoreEngine --> RankBatch["Sort Candidates Descending by Match Score"]
+    RankBatch --> DispatchAlerts["Create request_matches & Insert Donor Dashboard Notifications"]
+
+    DispatchAlerts --> WaitLoop["Public Coordination Board Broadcasts Request (Masked Phones)"]
+    WaitLoop --> CheckTimeout{"Required-By Deadline Passed?"}
+    CheckTimeout -- "Yes" --> AutoExpire["Expiry Engine Automatically Transitions Request to 'expired'"]
+
+    CheckTimeout -- "No" --> DonorDecision{"Eligible Donor Action"}
+    DonorDecision -- "Decline" --> LogDecline["Update match status='declined' with reason & Log Audit Trail"]
+    DonorDecision -- "Accept" --> BeginTx["Begin PDO Transaction with Row-Level Lock:<br>SELECT * FROM blood_requests WHERE id = ? FOR UPDATE"]
+
+    BeginTx --> CheckUnits{"Are Units Still Needed?<br>(units_fulfilled < units_needed)"}
+    CheckUnits -- "No (Race Condition Mitigated)" --> RollbackTx["Rollback Transaction & Inform Donor: 'Units Already Covered'"]
+    CheckUnits -- "Yes" --> AllocateUnit["Increment units_fulfilled = units_fulfilled + 1<br>Set match status='accepted'"]
+    AllocateUnit --> CheckFulfilled{"units_fulfilled == units_needed?"}
+    CheckFulfilled -- "Yes" --> SetFulfilled["Update blood_requests status='fulfilled'"]
+    CheckFulfilled -- "No" --> CommitTx["Commit Transaction & Record match_accepted Audit Event"]
+    SetFulfilled --> CommitTx
+
+    CommitTx --> UnmaskContact["Hospital Console Unmasks Donor Phone (0300-1234567)"]
+    UnmaskContact --> PhysicalDonation["Donor Attends Hospital & Completes Physical Phlebotomy"]
+    PhysicalDonation --> MarkDonated["Hospital Coordinator Clicks 'Mark Donated'"]
+
+    MarkDonated --> DBTrigger["Database Trigger Fires: trg_donation_after_insert"]
+    DBTrigger --> EnforceCooldown["Set donor last_donation_date = CURDATE() (90-Day Cooldown)"]
+    EnforceCooldown --> IncInventory["Increment hospital blood_inventory units_available (+1)"]
+    IncInventory --> CheckAllDonated{"All Promised Units Donated?"}
+    CheckAllDonated -- "Yes" --> CloseRequest["Update blood_requests status='closed'"]
+    CheckAllDonated -- "No" --> WaitLoop
+    CloseRequest --> Finished(["Emergency Lifecycle Completed"])
+    AutoExpire --> Finished
+    DenyAuth --> Finished
+    DenyCrit --> Finished
+    RollbackTx --> Finished
+```
+
+---
+
+## 9. Installation & XAMPP Setup Guide
 
 ### Prerequisites
 * **XAMPP** for Windows (PHP 8.1 or higher, Apache, MariaDB/MySQL).
-* Required PHP extensions: `pdo_mysql`, `mbstring`, `fileinfo` (enabled by default in XAMPP). Optional: `gd` (for photo re-encoding).
+* Required PHP extensions: `pdo_mysql`, `mbstring`, `fileinfo` (enabled by default in standard XAMPP). Optional: `gd` (for photo re-encoding).
 
 ### Step-by-Step Installation
 
@@ -575,13 +642,13 @@ stateDiagram-v2
 3. **Database Initialization**:
    Open **phpMyAdmin** (`http://localhost/phpmyadmin`) or MySQL Command Line and run:
    ```sql
-   -- Create database and import schema
-   mysql -u root -p < sql/schema.sql
+   -- Create database and import schema (drops/creates donornexa DB, creates 11 tables, triggers, views)
+   mysql -u root < sql/schema.sql
 
-   -- Populate system with realistic seed data
-   mysql -u root -p < sql/seed.sql
+   -- Populate system with realistic seed data (40 donors, 5 hospitals, 20 requests, audit logs)
+   mysql -u root < sql/seed.sql
    ```
-   *Alternative*: In phpMyAdmin, create database `donornexa` (utf8mb4_unicode_ci), then use the **Import** tab to import `sql/schema.sql` followed by `sql/seed.sql`.
+   *Alternative via phpMyAdmin*: Open phpMyAdmin, click **Import**, select `sql/schema.sql`, and execute. Then select the generated `donornexa` database, click **Import**, select `sql/seed.sql`, and execute.
 
 4. **Verify Database Configuration**:
    Inspect [config/db.php](file:///c:/Users/nandd/Downloads/DonorNexa/config/db.php) to confirm database connection parameters:
@@ -611,36 +678,39 @@ stateDiagram-v2
 
 ---
 
-## 9. Seed Data & Test Credentials
+## 10. Seed Data & Test Credentials
 
 The database seed provides a pre-populated coordination ecosystem: 40 active donors, 5 hospitals across major cities, 20 varied emergency requests, historical donations, inventory levels, and comprehensive audit logs.
 
-| Account Type | Email Address | Password | Profile Details & Context |
+**Direct Sign In URL**: `http://localhost/DonorNexa/public/index.php?r=login`
+
+| Role / Account Type | Email Address | Password | Profile Context & Test Scenarios |
 |---|---|---|---|
-| **System Administrator** | `admin@donornexa.pk` | `Admin@123` | Full administrative governance, audit logs, setting configurations, hospital approvals |
-| **Hospital (Verified)** | `hospital.luh@donornexa.pk` | `Hospital@123` | Liaquat University Hospital, Hyderabad (Trust Score: 95/100) |
-| **Hospital (Verified)** | `hospital.civil@donornexa.pk` | `Hospital@123` | Civil Hospital, Karachi (Trust Score: 100/100) |
-| **Hospital (Verified)** | `hospital.lumhs@donornexa.pk` | `Hospital@123` | LUMHS, Jamshoro (Trust Score: 98/100) |
-| **Hospital (Verified)** | `hospital.skm@donornexa.pk` | `Hospital@123` | Shaukat Khanum, Lahore (Trust Score: 100/100) |
-| **Hospital (Pending)** | `hospital.sukkur@donornexa.pk` | `Hospital@123` | Ghulam Muhammad Mahar Hospital, Sukkur (Pending admin verification) |
-| **Eligible Donors** | `donor1@example.com` to `donor39@example.com` | `Donor@123` | Donors with diverse blood types, cities, and eligibility states |
-| **Donor (Blocked)** | `donor40@example.com` | `Donor@123` | Account locked by administrator for policy non-compliance |
+| **System Administrator** | `admin@donornexa.pk` | `Admin@123` | Full administrative governance, hospital licence approval, user toggles, audit logs, CSV reports |
+| **Hospital (Verified)** | `hospital.luh@donornexa.pk` | `Hospital@123` | Liaquat University Hospital, Hyderabad (Trust: 95/100, active requests & inventory) |
+| **Hospital (Verified)** | `hospital.civil@donornexa.pk` | `Hospital@123` | Civil Hospital, Karachi (Trust: 100/100) |
+| **Hospital (Verified)** | `hospital.lumhs@donornexa.pk` | `Hospital@123` | LUMHS, Jamshoro (Trust: 98/100) |
+| **Hospital (Verified)** | `hospital.skm@donornexa.pk` | `Hospital@123` | Shaukat Khanum, Lahore (Trust: 100/100) |
+| **Hospital (Pending)** | `hospital.sukkur@donornexa.pk` | `Hospital@123` | Ghulam Muhammad Mahar Hospital, Sukkur (For admin licence verification evaluation) |
+| **Eligible Donors** | `donor1@example.com` to `donor39@example.com` | `Donor@123` | Donors with diverse blood groups, cities (Hyderabad, Jamshoro, Karachi, Lahore), and rest days |
+| **Donor (Blocked)** | `donor40@example.com` | `Donor@123` | Account locked by administrator for policy non-compliance (evaluates 403 authorization guard) |
 
 ---
 
-## 10. Viva / Evaluation Demo Script
+## 11. Viva / Evaluation Demo Script
 
 Follow this structured workflow during academic examination to demonstrate full compliance with functional and non-functional requirements:
 
 1. **Guest Experience & Live Emergency Coordination**:
    * Open `http://localhost/DonorNexa/public/`. Observe live counters loaded asynchronously via AJAX (`/api/stats.php`).
+   * Toggle the **Theme Switcher** (sun/moon icon in navbar): observe instant switching between Light Mode and Neutral Matte Dark Mode (persists across reloads via `localStorage`).
    * Click **Emergencies** in the top navigation. Observe the live emergency board with urgency badges (Critical, Urgent, Normal) and real-time JavaScript countdown timers. Notice that all patient identities and contact numbers are strictly masked.
    * Click urgency filters (*All*, *Critical*, *Urgent*, *Normal*) to verify client-side filtering without page reloads.
 
 2. **Hospital Workflow: Broadcast & Algorithmic Donor Matching**:
    * Sign in as **Liaquat University Hospital** (`hospital.luh@donornexa.pk` / `Hospital@123`).
    * Click **New request**. Post a blood request: Blood Group `O+`, Units `2`, Urgency `Critical`, Deadline `+12 Hours`, Ward Notes `Trauma Unit ICU`.
-   * Upon submission, observe the ranked donor table: donors are scored (out of 100) using compatibility, geographic proximity, and rest period. Notice contact numbers are masked (`0300-*******`).
+   * Upon submission, observe the ranked donor table: donors are scored (out of 100) using compatibility (+40), geographic proximity (+25), and rest period (+20). Notice contact numbers are masked (`0300-*******`).
 
 3. **Donor Workflow: Notification & Concurrency Protection**:
    * In a private/incognito window, sign in as one of the notified donors (e.g., `donor1@example.com` / `Donor@123`).
@@ -667,7 +737,7 @@ Follow this structured workflow during academic examination to demonstrate full 
 
 ---
 
-## 11. Folder Structure & Architectural Decoupling
+## 12. Folder Structure & Architectural Decoupling
 
 The project strictly follows the suggested structure outlined in Section 9 of the official CEP specification (`23SW_WE_CEP_PHP_Project.pdf`):
 
@@ -716,13 +786,16 @@ DonorNexa/
 │   └── licences/            Private hospital medical licences (accessible solely by verified admin)
 ├── logs/                    SYSTEM LOGGING
 │   └── error.log            Exception stack traces and unhandled error logs
-└── cli/                     COMMAND-LINE INTERFACE UTILITIES
-    └── expire.php           Cron utility for auto-expiring overdue requests
+├── cli/                     COMMAND-LINE INTERFACE UTILITIES
+│   └── expire.php           Cron utility for auto-expiring overdue requests
+├── index.php                Root gateway redirecting browser traffic to public/index.php
+├── .gitignore               Git ignore configuration
+└── README.md                Project documentation and UML diagrams
 ```
 
 ---
 
-## 12. Core Domain Engine & Algorithms
+## 13. Core Domain Engine & Algorithms
 
 ### ABO/Rh Compatibility Engine
 Blood compatibility is modeled relationally via table `blood_compatibility`. No nested switch-case statements are used:
@@ -761,7 +834,7 @@ If two donors accept the final remaining unit at the exact same millisecond:
 
 ---
 
-## 13. Security Hardening & OWASP Compliance
+## 14. Security Hardening & OWASP Compliance
 
 DonorNexa implements comprehensive, defense-in-depth protections aligned with OWASP Top-10 standards:
 
@@ -806,6 +879,6 @@ DonorNexa implements comprehensive, defense-in-depth protections aligned with OW
 
 ---
 
-## 14. Academic Integrity & Declarations
+## 15. Academic Integrity & Declarations
 
 This software engineering project was developed for the Web Engineering Continuous Evaluation Problem (CEP), Department of Software Engineering. All architectural layers, database design, algorithms, responsive presentation templates, and security controls strictly adhere to the course syllabus and engineering guidelines.
