@@ -320,9 +320,7 @@
   /* ---------- Dark / Light Theme Switcher ---------- */
   var themeToggleBtn = document.getElementById('theme-toggle');
   function getCurrentTheme() {
-    return document.documentElement.getAttribute('data-theme') ||
-      localStorage.getItem('dn_theme') ||
-      (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    return localStorage.getItem('dn_theme') || 'light';
   }
 
   function applyTheme(theme) {
@@ -340,14 +338,6 @@
       var current = getCurrentTheme();
       var nextTheme = current === 'dark' ? 'light' : 'dark';
       applyTheme(nextTheme);
-    });
-  }
-
-  if (window.matchMedia) {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
-      if (!localStorage.getItem('dn_theme')) {
-        applyTheme(e.matches ? 'dark' : 'light');
-      }
     });
   }
 

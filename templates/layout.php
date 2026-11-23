@@ -16,10 +16,7 @@ $pageTitle = ($title ?? '') !== '' ? $title . ' · DonorNexa' : 'DonorNexa · Co
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f172a'/%3E%3Cpath d='M16 8v16M8 16h16' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
     <script>
         (function() {
-            var theme = localStorage.getItem('dn_theme');
-            if (!theme) {
-                theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
-            }
+            var theme = localStorage.getItem('dn_theme') || 'light';
             document.documentElement.setAttribute('data-theme', theme);
         })();
     </script>
