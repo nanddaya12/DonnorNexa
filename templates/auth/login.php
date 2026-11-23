@@ -35,15 +35,6 @@
                 <?= icon('arrow-right', 16) ?>
             </button>
 
-            <div class="demo-creds-box">
-                <span class="demo-creds-title">Quick Demo Accounts:</span>
-                <div class="demo-btn-group">
-                    <button type="button" class="btn-demo-fill" data-email="admin@donornexa.pk" data-pass="Admin@123">Admin</button>
-                    <button type="button" class="btn-demo-fill" data-email="hospital.luh@donornexa.pk" data-pass="Hospital@123">LUH Hospital</button>
-                    <button type="button" class="btn-demo-fill" data-email="donor1@example.com" data-pass="Donor@123">Donor</button>
-                </div>
-            </div>
-
             <div class="auth-divider"><span>OR</span></div>
             <div class="auth-links center">
                 <span>Don't have an account yet?</span><br>
