@@ -13,6 +13,30 @@ use DonorNexa\Services\ExpiryService;
 
 define('BASE_PATH', dirname(__DIR__));
 
+// Load environment variables from .env if present (Production-ready 12-factor config)
+if (is_file(BASE_PATH . '/.env')) {
+    $envLines = @file(BASE_PATH . '/.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) ?: [];
+    foreach ($envLines as $line) {
+        $line = trim($line);
+        if ($line === '' || str_starts_with($line, '#')) {
+            continue;
+        }
+        if (str_contains($line, '=')) {
+            [$k, $v] = explode('=', $line, 2);
+            $k = trim($k);
+            $v = trim($v);
+            if ((str_starts_with($v, '"') && str_ends_with($v, '"')) || (str_starts_with($v, "'") && str_ends_with($v, "'"))) {
+                $v = substr($v, 1, -1);
+            }
+            if (getenv($k) === false) {
+                putenv("{$k}={$v}");
+                $_ENV[$k] = $v;
+                $_SERVER[$k] = $v;
+            }
+        }
+    }
+}
+
 spl_autoload_register(static function (string $class): void {
     $prefix = 'DonorNexa\\';
     if (strncmp($class, $prefix, strlen($prefix)) !== 0) {

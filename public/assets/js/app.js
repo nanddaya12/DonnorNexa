@@ -317,6 +317,40 @@
     });
   });
 
+  /* ---------- Dark / Light Theme Switcher ---------- */
+  var themeToggleBtn = document.getElementById('theme-toggle');
+  function getCurrentTheme() {
+    return document.documentElement.getAttribute('data-theme') ||
+      localStorage.getItem('dn_theme') ||
+      (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    try { localStorage.setItem('dn_theme', theme); } catch (e) {}
+    if (themeToggleBtn) {
+      themeToggleBtn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      themeToggleBtn.setAttribute('title', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+  }
+
+  if (themeToggleBtn) {
+    applyTheme(getCurrentTheme());
+    themeToggleBtn.addEventListener('click', function () {
+      var current = getCurrentTheme();
+      var nextTheme = current === 'dark' ? 'light' : 'dark';
+      applyTheme(nextTheme);
+    });
+  }
+
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+      if (!localStorage.getItem('dn_theme')) {
+        applyTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+  }
+
   /* ---------- Quick Time Buttons in Request Form ---------- */
   document.querySelectorAll('.btn-time-helper').forEach(function (btn) {
     btn.addEventListener('click', function () {

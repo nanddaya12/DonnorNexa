@@ -33,7 +33,7 @@
         </div>
         <div class="footer-bottom">
             <p>&copy; <?= date('Y') ?> <strong>DonorNexa</strong> · Emergency Blood-Donor Coordination Portal</p>
-            <p class="muted">Web Engineering CEP · Department of Software Engineering</p>
+            <p class="muted">DonorNexa Healthcare Coordination Network · Official Production Portal</p>
         </div>
     </div>
 </footer>

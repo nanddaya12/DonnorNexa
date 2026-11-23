@@ -10,10 +10,25 @@ function e(mixed $value): string
     return htmlspecialchars((string) $value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
-/** Web path of the project folder, e.g. /DonorNexa (works from public/ and api/). */
+/** Detect whether the web server's DocumentRoot points directly to public/ */
+function is_public_document_root(): bool
+{
+    static $isDocRoot = null;
+    if ($isDocRoot === null) {
+        $script = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '');
+        $isDocRoot = !str_contains($script, '/public/');
+    }
+    return $isDocRoot;
+}
+
+/** Web path of the project folder, e.g. /DonorNexa (works from public/, api/ or custom DocumentRoot). */
 function app_root_url(): string
 {
-    $dir = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '')), '/');
+    $script = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '');
+    $dir = rtrim(dirname($script), '/');
+    if ($dir === '/' || $dir === '\\') {
+        $dir = '';
+    }
     return preg_replace('#/(public|api)$#', '', $dir) ?? '';
 }
 
@@ -21,7 +36,9 @@ function app_root_url(): string
 function url(string $route = 'home', array $params = []): string
 {
     $query = http_build_query(['r' => $route] + $params);
-    return app_root_url() . '/public/index.php?' . str_replace('%2F', '/', $query);
+    $root = app_root_url();
+    $prefix = is_public_document_root() ? '' : '/public';
+    return $root . $prefix . '/index.php?' . str_replace('%2F', '/', $query);
 }
 
 function asset(string $path): string
@@ -29,17 +46,22 @@ function asset(string $path): string
     $clean = ltrim($path, '/');
     $file = BASE_PATH . '/public/assets/' . $clean;
     $v = is_file($file) ? ('?v=' . filemtime($file)) : '';
-    return app_root_url() . '/public/assets/' . $clean . $v;
+    $root = app_root_url();
+    $prefix = is_public_document_root() ? '' : '/public';
+    return $root . $prefix . '/assets/' . $clean . $v;
 }
 
 function api_url(string $file): string
 {
-    return app_root_url() . '/api/' . $file;
+    $root = app_root_url();
+    return $root . '/api/' . ltrim($file, '/');
 }
 
 function upload_url(string $file): string
 {
-    return app_root_url() . '/public/uploads/photos/' . rawurlencode($file);
+    $root = app_root_url();
+    $prefix = is_public_document_root() ? '' : '/public';
+    return $root . $prefix . '/uploads/photos/' . rawurlencode($file);
 }
 
 function redirect(string $route, array $params = []): void

@@ -36,6 +36,9 @@ class LiveHTTPTester:
         self.assert_test("Quick Demo Accounts" not in login_html, "No demo credential box rendered in HTML")
         self.assert_test("btn-demo-fill" not in login_html, "No demo fill buttons in HTML")
         self.assert_test("Admin@123" not in login_html, "No plain passwords exposed in HTML")
+        self.assert_test("theme-toggle" in login_html, "Theme toggle button present in live header")
+        self.assert_test("Web Engineering CEP" not in login_html, "Footer contains NO academic CEP references")
+        self.assert_test("Official Production Portal" in login_html, "Footer contains clean production branding")
         csrf_token = self.get_csrf(login_html)
         self.assert_test(csrf_token is not None and len(csrf_token) == 64, "Dynamic CSRF token embedded in login form")
 

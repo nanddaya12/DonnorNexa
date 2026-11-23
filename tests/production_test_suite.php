@@ -219,14 +219,27 @@ $dirtyInput = "<script>alert('xss')</script>";
 $cleanOutput = e($dirtyInput);
 $t->assert($cleanOutput === "&lt;script&gt;alert(&#039;xss&#039;)&lt;/script&gt;", "e() helper sanitizes raw script tags against XSS");
 
-echo "\n--- Suite 10: Production UI Validation ---\n";
+echo "\n--- Suite 10: Production UI, Theme Switcher & Real-World Deployability ---\n";
 $loginTemplate = file_get_contents(BASE_PATH . '/templates/auth/login.php');
 $t->assert(!str_contains($loginTemplate, 'btn-demo-fill'), "Login template contains NO btn-demo-fill elements");
 $t->assert(!str_contains($loginTemplate, 'Quick Demo Accounts'), "Login template contains NO demo credentials box");
 $t->assert(!str_contains($loginTemplate, 'Admin@123'), "Login template contains NO hardcoded password strings");
 
+$navbarTemplate = file_get_contents(BASE_PATH . '/templates/partials/navbar.php');
+$t->assert(str_contains($navbarTemplate, 'id="theme-toggle"'), "Theme switcher button present in navigation header");
+$t->assert(str_contains($navbarTemplate, 'theme-icon-sun') && str_contains($navbarTemplate, 'theme-icon-moon'), "Sun and Moon icons embedded in theme toggle");
+
+$footerTemplate = file_get_contents(BASE_PATH . '/templates/partials/footer.php');
+$t->assert(!str_contains($footerTemplate, 'Web Engineering CEP'), "Footer contains NO academic CEP references");
+$t->assert(str_contains($footerTemplate, 'Official Production Portal'), "Footer contains clean production branding");
+
 $appJs = file_get_contents(BASE_PATH . '/public/assets/js/app.js');
 $t->assert(!str_contains($appJs, 'btn-demo-fill'), "app.js contains NO demo fill handlers");
+$t->assert(str_contains($appJs, 'theme-toggle'), "app.js contains theme switching logic");
+
+$t->assert(is_file(BASE_PATH . '/sql/production_setup.sql'), "Clean production SQL setup script exists without dummy records");
+$t->assert(is_file(BASE_PATH . '/cli/create_admin.php'), "CLI administrator provisioning tool exists");
+$t->assert(is_file(BASE_PATH . '/.env.example'), "12-factor .env.example configuration file exists");
 
 $allPassed = $t->summary();
 exit($allPassed ? 0 : 1);
