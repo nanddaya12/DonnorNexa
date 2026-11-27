@@ -1,0 +1,907 @@
+/* ==========================================================================
+   DonorNexa - Hospital Console, Blood Bank Inventory & Request Detail Styles
+   ========================================================================== */
+
+/* ==========================================================================
+   Hospital Console Views & Tables
+   ========================================================================== */
+
+.portal-header-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-line);
+  padding: 1.75rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.portal-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.hospital-avatar,
+.admin-avatar {
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: var(--radius-md);
+  background: var(--sky-soft);
+  color: var(--sky);
+  border: 1px solid var(--sky-border);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.admin-avatar {
+  background: var(--purple-soft);
+  color: var(--purple);
+  border-color: var(--purple-border);
+}
+
+.hospital-avatar svg,
+.admin-avatar svg {
+  width: 1.9rem;
+  height: 1.9rem;
+}
+
+.portal-header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.hospital-sub-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.verification-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-pill);
+}
+
+.status-verified {
+  background: var(--emerald-soft);
+  color: var(--emerald);
+  border: 1px solid var(--emerald-border);
+}
+
+.status-pending {
+  background: var(--amber-soft);
+  color: var(--amber);
+  border: 1px solid var(--amber-border);
+}
+
+.trust-badge {
+  font-size: 0.82rem;
+  color: var(--ink-600);
+}
+
+/* Donor Directory Search */
+.search-row-elevated {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.search-input-wrap {
+  position: relative;
+  flex: 1 1 280px;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.9rem;
+  width: 1.15rem;
+  height: 1.15rem;
+  color: var(--ink-400);
+  pointer-events: none;
+}
+
+.search-input-wrap input {
+  padding-left: 2.6rem;
+}
+
+.group-select-wrap {
+  flex: 0 1 200px;
+}
+
+.results-cards {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  margin-top: 1.25rem;
+}
+
+.donor-chip {
+  display: flex;
+  gap: 0.85rem;
+  align-items: center;
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  background: #fff;
+  box-shadow: var(--shadow-xs);
+  transition: all var(--duration) var(--ease);
+}
+
+.donor-chip:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary-soft-border);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Modern Tables */
+.table-wrap {
+  overflow-x: auto;
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-line);
+  margin-bottom: 1.5rem;
+}
+
+.table-modern {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 680px;
+}
+
+.table-modern th,
+.table-modern td {
+  padding: 0.9rem 1.15rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-line);
+  vertical-align: middle;
+}
+
+.table-modern th {
+  background: var(--bg-canvas);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-500);
+}
+
+.table-modern th a {
+  color: var(--ink-500);
+  text-decoration: none;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: color var(--duration) var(--ease);
+}
+
+.table-modern th a:hover {
+  color: var(--ink-900);
+}
+
+[data-theme="dark"] .table-modern th a {
+  color: var(--ink-400);
+}
+
+[data-theme="dark"] .table-modern th a:hover {
+  color: #fafafa;
+}
+
+.table-modern tbody tr {
+  transition: background var(--duration) var(--ease);
+}
+
+.table-modern tbody tr:hover {
+  background: #f8fafc;
+}
+
+.table-modern tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.id-tag {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--ink-600);
+}
+
+.table-progress-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 120px;
+}
+
+.progress-ratio {
+  font-size: 0.82rem;
+  color: var(--ink-600);
+}
+
+.time-stamp {
+  font-size: 0.88rem;
+  color: var(--ink-600);
+}
+
+.filter-bar-styled {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.filter-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.filter-inputs select,
+.filter-inputs input {
+  width: auto;
+  flex: 1 1 160px;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+  justify-content: center;
+  margin-block: 1.5rem;
+}
+
+.pagination a,
+.pagination span {
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  background: var(--bg-surface);
+  color: var(--ink-700);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all var(--duration) var(--ease);
+}
+
+.pagination a:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.pagination a.current,
+.pagination span.current {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+/* Quick time helpers in request form */
+.quick-time-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+
+.btn-time-helper {
+  background: var(--border-subtle);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-xs);
+  padding: 0.25rem 0.55rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink-700);
+  cursor: pointer;
+  transition: all var(--duration) var(--ease);
+}
+
+.btn-time-helper:hover {
+  background: var(--primary-soft);
+  color: var(--primary);
+  border-color: var(--primary-soft-border);
+}
+
+/* Blood Bank Inventory Vials */
+.inventory-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.inventory-vial-card {
+  background: var(--border-subtle);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.vial-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stock-status {
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-pill);
+}
+
+.stock-ok {
+  background: var(--emerald-soft);
+  color: var(--emerald);
+}
+
+.stock-zero {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.counter-input-group {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  overflow: hidden;
+}
+
+.btn-step {
+  background: var(--border-subtle);
+  border: none;
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  color: var(--ink-700);
+  transition: background var(--duration) var(--ease);
+}
+
+.btn-step:hover {
+  background: var(--ink-300);
+}
+
+.counter-input {
+  border: none !important;
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+  padding: 0.4rem !important;
+  box-shadow: none !important;
+}
+
+.inventory-submit-strip {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.75rem;
+  align-items: center;
+}
+
+/* Score display in request detail */
+.score-display {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 90px;
+}
+
+.score-value {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink-900);
+}
+
+.score-micro-bar {
+  height: 4px;
+  background: var(--border-line);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.score-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #059669, #10b981);
+}
+
+.phone-reveal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--emerald-soft);
+  color: var(--emerald);
+  border: 1px solid var(--emerald-border);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.masked-phone {
+  font-family: var(--font-mono);
+  color: var(--ink-500);
+  font-size: 0.88rem;
+}
+
+/* ==========================================================================
+   Request Detail View & Components
+   ========================================================================== */
+
+.request-detail-view {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-section);
+  /* Rule 5: 24px+ apart */
+}
+
+/* Breadcrumb Navigation */
+.breadcrumb-nav {
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+}
+
+.btn-back,
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-item-group);
+  /* Rule 5: 8-12px */
+  background: var(--bg-surface);
+  color: var(--ink-700);
+  border: 1px solid var(--border-line);
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: var(--shadow-xs);
+  transition: all var(--duration) var(--ease);
+  /* Rule 7: 150-250ms ease-out */
+}
+
+.btn-back:hover,
+.back-link:hover {
+  background: var(--primary-soft);
+  color: var(--primary);
+  border-color: var(--primary-soft-border);
+}
+
+.btn-back:hover .btn-arrow-left,
+.back-link:hover .btn-arrow-left {
+  transform: translateX(-3px);
+}
+
+/* Single Surface Header Card (Rule 4: One surface per section) */
+.request-header-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-card);
+  /* Rule 6: 16px */
+  border: 1px solid var(--border-line);
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-bottom: 0;
+}
+
+.request-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.request-header-left .blood-badge-wrap {
+  flex-shrink: 0;
+}
+
+.request-header-left .blood-badge {
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: var(--radius-md);
+  /* Rule 6 */
+  background: var(--primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.request-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-label-val);
+  /* Rule 5: 2-4px */
+}
+
+.request-title-group h1 {
+  margin: 0;
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--ink-900);
+  line-height: 1.25;
+}
+
+.request-status-badges {
+  display: flex;
+  align-items: center;
+  gap: var(--space-item-group);
+  /* Rule 5: 8-12px */
+  margin-top: 2px;
+}
+
+/* Rule 4: Countdown is NOT a nested card. It is a clean metric column inside the header surface */
+.countdown-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-label-val);
+  /* Rule 5: 2-4px */
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--border-line);
+  /* Rule 4: 1px divider */
+}
+
+@media (max-width: 680px) {
+  .countdown-metric {
+    align-items: flex-start;
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid var(--border-line);
+    padding-top: 1rem;
+    width: 100%;
+  }
+}
+
+.countdown-title {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-500);
+}
+
+.countdown-metric .countdown {
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+}
+
+/* Single Surface Details Panel (Rule 4: One surface, separated by 1px dividers or spacing) */
+.request-meta-panel {
+  background: var(--bg-surface);
+  border-radius: var(--radius-card);
+  /* Rule 6: 16px */
+  border: 1px solid var(--border-line);
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 0;
+}
+
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  /* Rule 4 & 5 */
+}
+
+/* Rule 4: No cards inside cards! .fact-box has transparent background and no nested border */
+.fact-box {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-label-val);
+  /* Rule 5: 2-4px */
+}
+
+.fact-box-full {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--border-line);
+  /* Rule 4: 1px divider */
+  padding-top: 1rem;
+  margin-top: 0.25rem;
+}
+
+.fact-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-500);
+}
+
+.fact-val {
+  font-size: 1.05rem;
+  color: var(--ink-900);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.meter-bar-wrap {
+  margin-top: 4px;
+}
+
+.meter-bar-wrap progress {
+  width: 100%;
+  height: 8px;
+  border-radius: var(--radius-xs);
+  appearance: none;
+  overflow: hidden;
+  border: none;
+  background: #e2e8f0;
+}
+
+.meter-bar-wrap progress::-webkit-progress-bar {
+  background: #e2e8f0;
+  border-radius: var(--radius-xs);
+}
+
+.meter-bar-wrap progress::-webkit-progress-value {
+  background: var(--primary);
+  border-radius: var(--radius-xs);
+}
+
+.meter-bar-wrap progress::-moz-progress-bar {
+  background: var(--primary);
+  border-radius: var(--radius-xs);
+}
+
+/* Action buttons: separated with 1px divider (Rule 4) */
+.button-row-actions {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-line);
+  /* Rule 4: 1px divider */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-item-group);
+  /* Rule 5: 8-12px */
+}
+
+/* Rank Badges */
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+}
+
+.rank-badge.rank-1 {
+  background: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fde68a;
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.25);
+}
+
+.rank-badge.rank-2 {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+
+.rank-badge.rank-3 {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.rank-badge.rank-other {
+  background: transparent;
+  color: var(--ink-500);
+  font-weight: 600;
+}
+
+/* Decline Reason Pill */
+.decline-reason-pill {
+  display: inline-block;
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+  color: #dc2626;
+  background: #fef2f2;
+  border: 1px solid #fee2e2;
+  border-radius: var(--radius-xs);
+  padding: 0.2rem 0.55rem;
+  font-style: italic;
+}
+
+.status-large {
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+
+
+/* Inventory Elements */
+.inventory-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-line);
+  padding: 1.5rem;
+}
+
+.inventory-total-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-pill);
+  padding: 0.4rem 1rem;
+  font-weight: 700;
+}
+
+.total-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  color: var(--ink-500);
+}
+
+.total-count {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.vial-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.btn-plus,
+.btn-minus {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  border: 1px solid var(--border-line);
+  background: var(--bg-surface);
+  font-weight: 800;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: all var(--duration) var(--ease);
+}
+
+.btn-plus:hover,
+.btn-minus:hover {
+  background: var(--primary-soft);
+  color: var(--primary);
+  border-color: var(--primary-soft-border);
+}
+
+/* Hospital Directory & Badges */
+.hospital-name-text {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--ink-900);
+}
+
+.licence-no {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--ink-500);
+}
+
+.trust-meter-val {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--ink-800);
+}
+
+.header-action-pill {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-line);
+  background: var(--bg-surface);
+  text-decoration: none;
+  color: var(--ink-700);
+}
+
+.banner-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+  background: var(--amber-soft);
+  color: var(--amber);
+  border: 1px solid var(--amber-border);
+}
+
+.verification-notice-banner {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  color: #92400e;
+}
+
+.verification-notice-banner p {
+  color: #78350f;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.verification-notice-banner strong {
+  color: #451a03;
+}
+
+[data-theme="dark"] .verification-notice-banner {
+  background: #231b0e;
+  border-color: #45341a;
+  color: #fde68a;
+}
+
+[data-theme="dark"] .verification-notice-banner p {
+  color: #fef3c7;
+}
+
+[data-theme="dark"] .verification-notice-banner strong {
+  color: #ffffff;
+}
+
+.pdf-dropzone {
+  border: 2px dashed var(--border-line);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  text-align: center;
+  background: #fafafa;
+  cursor: pointer;
+  transition: all var(--duration) var(--ease);
+}
+
+.pdf-dropzone:hover {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+

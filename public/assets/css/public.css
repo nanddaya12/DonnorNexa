@@ -1,0 +1,967 @@
+/* ==========================================================================
+   DonorNexa - Public Landing & Emergency Coordination Board Styles
+   ========================================================================== */
+
+/* ==========================================================================
+   Hero Section & Landing
+   ========================================================================== */
+
+.hero {
+  padding: 2.5rem 0 2rem;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--primary-soft);
+  color: var(--primary);
+  border: 1px solid var(--primary-soft-border);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 1.25rem;
+}
+
+.live-indicator-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--primary);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--ink-900);
+}
+
+.accent-gradient {
+  background: linear-gradient(135deg, #e11d48 0%, #b91c1c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.lead {
+  font-size: 1.15rem;
+  color: var(--ink-600);
+  max-width: 44rem;
+  line-height: 1.65;
+  margin-block: 1rem 1.75rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-bottom: 2.25rem;
+}
+
+.btn-hero {
+  padding: 0.85rem 1.6rem;
+  font-size: 1rem;
+}
+
+.btn-outline-hero {
+  background: var(--bg-surface);
+  border-color: var(--border-line);
+  color: var(--ink-800);
+  box-shadow: var(--shadow-xs);
+}
+
+.btn-outline-hero:hover {
+  background: var(--border-subtle);
+  border-color: var(--ink-300);
+  color: var(--ink-900);
+}
+
+.btn-secondary-hero {
+  background: transparent;
+  border-color: transparent;
+  color: var(--ink-700);
+}
+
+.btn-secondary-hero:hover {
+  background: rgba(15, 23, 42, 0.04);
+  color: var(--ink-900);
+}
+
+.trust-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
+  margin-top: 1.5rem;
+}
+
+.trust-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-label-val);
+}
+
+.trust-item strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--ink-900);
+  font-weight: 700;
+}
+
+.trust-item span {
+  font-size: 0.85rem;
+  color: var(--ink-500);
+}
+
+/* ==========================================================================
+   Statistics Cards
+   ========================================================================== */
+
+.stats-grid-wrap {
+  margin-block: 1.5rem 2.5rem;
+}
+
+.stats-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.stat-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-line);
+  padding: 1.35rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-label-val);
+  transition: all var(--duration) var(--ease);
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--ink-300);
+}
+
+.stat-icon-wrap {
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: var(--radius-md);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.stat-icon-wrap svg {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.stat-icon-red {
+  background: var(--primary-soft);
+  color: var(--primary);
+  border: 1px solid var(--primary-soft-border);
+}
+
+.stat-icon-blue {
+  background: var(--sky-soft);
+  color: var(--sky);
+  border: 1px solid var(--sky-border);
+}
+
+.stat-icon-green {
+  background: var(--emerald-soft);
+  color: var(--emerald);
+  border: 1px solid var(--emerald-border);
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-num {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--ink-900);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.stat-num-green {
+  color: var(--emerald);
+}
+
+.stat-num-amber {
+  color: var(--amber);
+}
+
+.stat-label {
+  color: var(--ink-500);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 0.2rem;
+}
+
+.stats-grid.five {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.stat-card-highlight {
+  border-color: var(--amber-border);
+  background: var(--amber-soft);
+}
+
+.stat-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   Emergency Cards & Live Emergency Board
+   ========================================================================== */
+
+.section {
+  margin-top: 3rem;
+}
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.section-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--primary);
+  margin-bottom: 0.25rem;
+}
+
+.section-desc {
+  color: var(--ink-500);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.view-all-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.card-grid {
+  display: grid;
+  gap: 1.15rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+}
+
+.emergency-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-line);
+  padding: 1.25rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem 1rem;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--duration) var(--ease);
+}
+
+.emergency-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: var(--ink-300);
+}
+
+.emergency-card.urgency-critical::before {
+  background: var(--primary);
+}
+
+.emergency-card.urgency-urgent::before {
+  background: var(--amber);
+}
+
+.emergency-card.urgency-normal::before {
+  background: var(--sky);
+}
+
+.emergency-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.blood-badge-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.blood-badge {
+  display: grid;
+  place-items: center;
+  width: 3.8rem;
+  height: 3.8rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e11d48 0%, #b91c1c 100%);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.25rem;
+  box-shadow: 0 4px 14px rgba(225, 29, 72, 0.28);
+  letter-spacing: -0.02em;
+}
+
+.blood-badge.small {
+  width: 2.8rem;
+  height: 2.8rem;
+  font-size: 0.98rem;
+}
+
+.blood-badge-inline {
+  display: inline-grid;
+  place-items: center;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 0.88rem;
+  border: 1px solid var(--primary-soft-border);
+}
+
+.critical-indicator {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 12px;
+  height: 12px;
+  background: var(--primary);
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
+.emergency-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.emergency-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.emergency-city {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 1.15rem;
+  margin: 0;
+  color: var(--ink-900);
+}
+
+.icon-pin,
+.icon-clock {
+  width: 1rem;
+  height: 1rem;
+  color: var(--ink-400);
+  flex-shrink: 0;
+}
+
+.countdown-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--border-subtle);
+  border: 1px solid var(--border-line);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  width: fit-content;
+}
+
+.countdown {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--ink-800);
+}
+
+.countdown.soon {
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.countdown-wrap:has(.countdown.soon) {
+  background: var(--primary-soft);
+  border-color: var(--primary-soft-border);
+}
+
+.countdown.done {
+  color: var(--ink-400);
+}
+
+/* Badges & Tags */
+.badge,
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-pill);
+  line-height: 1.3;
+}
+
+.badge-critical {
+  background: var(--primary-soft);
+  color: var(--primary);
+  border: 1px solid var(--primary-soft-border);
+}
+
+.badge-urgent {
+  background: var(--amber-soft);
+  color: var(--amber);
+  border: 1px solid var(--amber-border);
+}
+
+.badge-normal {
+  background: var(--sky-soft);
+  color: var(--sky);
+  border: 1px solid var(--sky-border);
+}
+
+.status-tag {
+  background: #f1f5f9;
+  color: var(--ink-700);
+}
+
+.status-open,
+.status-accepted,
+.status-verified,
+.status-donated,
+.status-fulfilled {
+  background: var(--emerald-soft);
+  color: var(--emerald);
+  border: 1px solid var(--emerald-border);
+}
+
+.status-notified,
+.status-pending {
+  background: var(--sky-soft);
+  color: var(--sky);
+  border: 1px solid var(--sky-border);
+}
+
+.status-declined,
+.status-cancelled,
+.status-rejected,
+.status-expired {
+  background: var(--primary-soft);
+  color: var(--primary);
+  border: 1px solid var(--primary-soft-border);
+}
+
+.status-no-response,
+.status-closed {
+  background: #f1f5f9;
+  color: var(--ink-500);
+}
+
+/* ==========================================================================
+   How It Works Flow & Compatibility
+   ========================================================================== */
+
+.section-head-center {
+  text-align: center;
+  max-width: 38rem;
+  margin: 0 auto 2.5rem;
+}
+
+.max-w-md {
+  max-width: 32rem;
+  margin-inline: auto;
+}
+
+.steps-flow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .steps-flow {
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: center;
+  }
+
+  .step-arrow {
+    font-size: 1.5rem;
+    color: var(--ink-300);
+    text-align: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .step-arrow {
+    display: none;
+  }
+}
+
+.step-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-line);
+  padding: 1.75rem 1.5rem;
+  position: relative;
+  transition: all var(--duration) var(--ease);
+}
+
+.step-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-soft-border);
+}
+
+.step-number {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  font-size: 2rem;
+  font-weight: 800;
+  color: rgba(15, 23, 42, 0.06);
+  font-family: var(--font-mono);
+}
+
+.step-icon-wrap {
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-md);
+  background: var(--primary-soft);
+  color: var(--primary);
+  display: grid;
+  place-items: center;
+  margin-bottom: 1rem;
+}
+
+.step-icon-wrap svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.step-card h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.15rem;
+}
+
+.step-card p {
+  color: var(--ink-500);
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+/* Compatibility Grid (Rule 4: One surface per section, no cards inside cards) */
+.compat-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem 1.75rem;
+}
+
+.compat-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-line);
+}
+
+.blood-universal-pill {
+  color: var(--primary);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.compat-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.compat-card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-label-val);
+  /* Rule 5: 2-4px */
+}
+
+.compat-group {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.compat-role {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--ink-800);
+}
+
+.compat-details {
+  font-size: 0.85rem;
+  color: var(--ink-500);
+  margin: 0;
+  line-height: 1.45;
+}
+
+
+
+/* Global Supporting Classes Across Views */
+.blood-group-text {
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.emergency-card.urgency-critical {
+  box-shadow: var(--shadow-sm);
+}
+
+.emergency-card.urgency-critical:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.emergency-card.is-hidden {
+  display: none !important;
+}
+
+#empty-filter,
+#empty-initial {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  background: var(--bg-surface);
+  border: 1px dashed var(--border-line);
+  border-radius: var(--radius-lg);
+  color: var(--ink-500);
+}
+
+.emergencies-filter-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0.85rem 1.25rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
+}
+
+.emergencies-filter-bar .filter-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  width: 100%;
+}
+
+.urgency-btn-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.urgency-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.88rem;
+  font-weight: 600;
+  border: 1px solid var(--border-line);
+  background: var(--bg-surface);
+  color: var(--ink-700);
+  cursor: pointer;
+  transition: all var(--duration) var(--ease);
+}
+
+.urgency-filter-btn:hover {
+  border-color: var(--border-focus);
+  background: var(--border-subtle);
+  color: var(--ink-900);
+}
+
+.urgency-filter-btn.active {
+  background: var(--ink-900);
+  color: #ffffff !important;
+  border-color: var(--ink-900);
+  box-shadow: none;
+}
+
+.urgency-filter-btn.filter-critical {
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+.urgency-filter-btn.filter-critical:hover {
+  background: #fef2f2;
+  border-color: #f87171;
+}
+
+.urgency-filter-btn.filter-critical.active {
+  background: #dc2626;
+  border-color: #dc2626;
+  color: #ffffff !important;
+  box-shadow: none;
+}
+
+.urgency-filter-btn.filter-urgent {
+  border-color: #fed7aa;
+  color: #b45309;
+}
+
+.urgency-filter-btn.filter-urgent:hover {
+  background: #fffbeb;
+  border-color: #fbbf24;
+}
+
+.urgency-filter-btn.filter-urgent.active {
+  background: #d97706;
+  border-color: #d97706;
+  color: #ffffff !important;
+  box-shadow: none;
+}
+
+.urgency-filter-btn.filter-normal {
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+}
+
+.urgency-filter-btn.filter-normal:hover {
+  background: #eff6ff;
+  border-color: #60a5fa;
+}
+
+.urgency-filter-btn.filter-normal.active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff !important;
+  box-shadow: none;
+}
+
+/* Dark mode filter button overrides */
+[data-theme="dark"] .urgency-filter-btn {
+  background: var(--bg-surface);
+  color: var(--ink-500);
+  border-color: var(--border-line);
+}
+
+[data-theme="dark"] .urgency-filter-btn:hover {
+  background: var(--bg-surface-raised);
+  color: var(--ink-900);
+  border-color: var(--border-focus);
+}
+
+[data-theme="dark"] .urgency-filter-btn.active {
+  background: #fafafa;
+  color: #121214 !important;
+  border-color: #fafafa;
+  box-shadow: none;
+}
+
+[data-theme="dark"] .urgency-filter-btn.filter-critical {
+  border-color: #571616;
+  color: #f87171;
+  background: transparent;
+}
+
+[data-theme="dark"] .urgency-filter-btn.filter-critical:hover {
+  background: rgba(220, 38, 38, 0.14);
+  border-color: #dc2626;
+}
+
+[data-theme="dark"] .urgency-filter-btn.filter-critical.active {
+  background: #dc2626;
+  border-color: #dc2626;
+  color: #ffffff !important;
+  box-shadow: none;
+}
+
+[data-theme="dark"] .urgency-filter-btn.filter-urgent {
+  border-color: #522d0c;
+  color: #fbbf24;
+  background: transparent;
+}
+
+[data-theme="dark"] .urgency-filter-btn.filter-urgent:hover {
+  background: rgba(217, 119, 6, 0.14);
+  border-color: #d97706;
+}
+
+[data-theme="dark"] .urgency-filter-btn.filter-urgent.active {
+  background: #d97706;
+  border-color: #d97706;
+  color: #ffffff !important;
+  box-shadow: none;
+}
+
+[data-theme="dark"] .urgency-filter-btn.filter-normal {
+  border-color: #172d54;
+  color: #60a5fa;
+  background: transparent;
+}
+
+[data-theme="dark"] .urgency-filter-btn.filter-normal:hover {
+  background: rgba(37, 99, 235, 0.14);
+  border-color: #2563eb;
+}
+
+[data-theme="dark"] .urgency-filter-btn.filter-normal.active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff !important;
+  box-shadow: none;
+}
+
+.urgency-legend {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--ink-600);
+}
+
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-critical {
+  background: #dc2626;
+}
+
+.dot-urgent {
+  background: #f59e0b;
+}
+
+.dot-normal {
+  background: #2563eb;
+}
+
+.dot-online {
+  background: #10b981;
+}
+
+.dot-wait {
+  background: #94a3b8;
+}
+
+.live-status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--emerald);
+  background: var(--emerald-soft);
+  border: 1px solid var(--emerald-border);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+}
+
+.live-status-dot,
+.live-dot-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  backgrou
+
+/* Home Sections */
+.section-emergencies,
+.section-how,
+.section-compatibility {
+  padding: 4.5rem 0;
+}
+
+.footer-brand-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.btn-manage {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.82rem;
+}
+
+.hospital-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.no-js-only {
+  display: none !important;
+}
+
+.sec-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+

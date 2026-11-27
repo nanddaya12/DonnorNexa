@@ -760,7 +760,7 @@ DonorNexa/
 │   ├── index.php            Front controller dispatches all routed web requests
 │   ├── .htaccess            URL rewriting and security headers
 │   ├── assets/              Static presentation assets
-│   │   ├── css/style.css    Custom responsive stylesheet (no third-party CSS frameworks)
+│   │   ├── css/             Modular stylesheets (common.css, public.css, auth.css, donor.css, hospital.css, admin.css)
 │   │   └── js/              Client-side scripts (app.js, admin.js, vendor/chart.umd.js)
 │   └── uploads/photos/      Public donor profile images
 ├── templates/               FRONTEND PRESENTATION VIEWS & PARTIALS

@@ -20,7 +20,33 @@ $pageTitle = ($title ?? '') !== '' ? $title . ' · DonorNexa' : 'DonorNexa · Co
             document.documentElement.setAttribute('data-theme', theme);
         })();
     </script>
-    <link rel="stylesheet" href="<?= e(asset('css/style.css')) ?>">
+    <link rel="stylesheet" href="<?= e(asset('css/common.css')) ?>">
+    <?php
+        $cssMap = [
+            'public/'   => 'css/public.css',
+            'auth/'     => 'css/auth.css',
+            'donor/'    => 'css/donor.css',
+            'hospital/' => 'css/hospital.css',
+            'admin/'    => 'css/admin.css',
+        ];
+        $matchedCss = null;
+        if (!empty($currentView)) {
+            foreach ($cssMap as $prefix => $sheet) {
+                if (str_starts_with($currentView, $prefix)) {
+                    $matchedCss = $sheet;
+                    break;
+                }
+            }
+        }
+    ?>
+    <?php if ($matchedCss): ?>
+    <link rel="stylesheet" href="<?= e(asset($matchedCss)) ?>">
+    <?php endif; ?>
+    <?php if (!empty($stylesheets)): ?>
+        <?php foreach ($stylesheets as $sheet): ?>
+        <link rel="stylesheet" href="<?= e(asset($sheet)) ?>">
+        <?php endforeach; ?>
+    <?php endif; ?>
 </head>
 <body data-csrf="<?= e(\DonorNexa\Core\Csrf::token()) ?>" data-api="<?= e(api_url('')) ?>">
 <a class="skip-link" href="#main">Skip to main content</a>

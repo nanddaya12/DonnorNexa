@@ -1,0 +1,555 @@
+/* ==========================================================================
+   DonorNexa - Donor Portal Views & Donation History Styles
+   ========================================================================== */
+
+/* ==========================================================================
+   Donor Portal Views
+   ========================================================================== */
+
+.donor-hero-banner {
+  background: linear-gradient(135deg, #ffffff 0%, #fff1f2 100%);
+  border: 1px solid var(--primary-soft-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  padding: 1.75rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.donor-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.portal-eyebrow {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--primary);
+}
+
+.donor-impact-stats {
+  display: flex;
+  gap: 1.5rem;
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--border-line);
+  /* Rule 4: 1px divider */
+}
+
+@media (max-width: 680px) {
+  .donor-impact-stats {
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid var(--border-line);
+    padding-top: 1rem;
+    width: 100%;
+  }
+}
+
+.impact-stat-item {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-label-val);
+  /* Rule 5: 2-4px */
+}
+
+.impact-stat-num {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.impact-stat-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink-500);
+}
+
+/* Facts List */
+.facts-styled {
+  display: grid;
+  gap: 0.75rem;
+  margin-block: 1rem;
+}
+
+.fact-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.fact-row dt {
+  color: var(--ink-500);
+  font-size: 0.9rem;
+}
+
+.fact-row dd {
+  margin: 0;
+  color: var(--ink-900);
+}
+
+/* Availability Control (Rule 4: separated by 1px divider, not a card in a card) */
+.availability-control-card {
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--border-line);
+  border-radius: 0;
+  padding: 1rem 0 0 0;
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avail-text strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--ink-900);
+}
+
+.avail-text p {
+  margin: 0.2rem 0 0;
+}
+
+.toggle-form {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.switch input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.slider {
+  width: 50px;
+  height: 28px;
+  background: var(--ink-300);
+  border-radius: var(--radius-pill);
+  position: relative;
+  transition: background 0.25s var(--ease);
+}
+
+.slider::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s var(--ease);
+}
+
+.switch input:checked+.slider {
+  background: var(--emerald);
+}
+
+.switch input:checked+.slider::after {
+  transform: translateX(22px);
+}
+
+.avail-feedback-pill {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--emerald);
+}
+
+/* Match Cards */
+.match-list {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.match-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-line);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--duration) var(--ease);
+}
+
+.match-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: var(--ink-300);
+}
+
+.match-card.urgency-critical::before {
+  background: var(--primary);
+}
+
+.match-card.urgency-urgent::before {
+  background: var(--amber);
+}
+
+.match-card.urgency-normal::before {
+  background: var(--sky);
+}
+
+.match-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.15rem;
+  align-items: center;
+}
+
+.match-center {
+  flex: 1 1 240px;
+}
+
+.match-hospital-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.match-hospital-title h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.city-tag {
+  font-size: 0.85rem;
+  color: var(--ink-500);
+  font-weight: 500;
+}
+
+.match-tags-row {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.35rem;
+}
+
+.match-notes-card {
+  background: var(--border-subtle);
+  border-left: 3px solid var(--ink-400);
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--radius-xs);
+  margin-block: 0.85rem;
+  font-size: 0.88rem;
+  color: var(--ink-700);
+}
+
+.units-progress-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-block: 0.85rem;
+}
+
+.units-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-600);
+}
+
+progress {
+  width: 100%;
+  height: 0.65rem;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+progress::-webkit-progress-bar {
+  background-color: var(--border-line);
+  border-radius: var(--radius-pill);
+}
+
+progress::-webkit-progress-value {
+  background: linear-gradient(90deg, #e11d48, #b91c1c);
+  border-radius: var(--radius-pill);
+}
+
+progress::-moz-progress-bar {
+  background: linear-gradient(90deg, #e11d48, #b91c1c);
+  border-radius: var(--radius-pill);
+}
+
+.match-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.btn-accept {
+  padding: 0.75rem 1.6rem;
+  font-size: 0.98rem;
+}
+
+.decline-box summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.decline-box summary::-webkit-details-marker {
+  display: none;
+}
+
+.decline-form {
+  background: var(--border-subtle);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  margin-top: 0.5rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+/* Badges / Awards */
+.badge-row {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+.award {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-line);
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.4rem;
+  transition: all var(--duration) var(--ease);
+}
+
+.award.earned {
+  border-color: #fde68a;
+  background: linear-gradient(180deg, #fffbeb 0%, #ffffff 100%);
+}
+
+.award.locked {
+  opacity: 0.55;
+  filter: grayscale(1);
+}
+
+.award-icon {
+  font-size: 2rem;
+}
+
+.award-title {
+  font-size: 0.95rem;
+  color: var(--ink-900);
+}
+
+.award-status-pill {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-pill);
+}
+
+.pill-earned {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.pill-locked {
+  background: var(--border-subtle);
+  color: var(--ink-400);
+}
+
+
+
+.avatar-img-circle {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 1.4rem;
+}
+
+.badges-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.award-icon-wrap {
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-md);
+  background: #fef3c7;
+  color: #b45309;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.history-count-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 0.85rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-line);
+}
+
+.units-badge {
+  font-weight: 700;
+  color: var(--primary);
+  background: var(--primary-soft);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-xs);
+  font-size: 0.85rem;
+}
+
+.count-num {
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.count-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-500);
+}
+
+
+
+/* Donor Dashboard Details */
+.donor-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.donor-welcome-text {
+  color: var(--ink-600);
+  font-size: 1rem;
+}
+
+.panel-eligibility,
+.panel-alerts,
+.panel-search-donors {
+  margin-bottom: 1.5rem;
+}
+
+.match-timer-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+}
+
+.timer-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-400);
+}
+
+.empty-compact {
+  padding: 1.5rem 1rem;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.btn-decline-toggle {
+  font-size: 0.82rem;
+  color: var(--ink-500);
+  text-decoration: underline;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem 0;
+}
+
+.small-link {
+  font-size: 0.82rem;
+  text-decoration: underline;
+  color: var(--ink-500);
+}
+
+.switch-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink-800);
+}
+
+.pulse-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.icon-heart {
+  color: var(--primary);
+  font-size: 1.15rem;
+}
+
+.plain {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+.compact {
+  padding: 0.5rem 0.75rem !important;
+}
+

@@ -42,6 +42,7 @@ final class ErrorHandler
             http_response_code($status);
         }
         $view = in_array($status, [401, 403, 404], true) ? (string) $status : '500';
+        $currentView = 'errors/' . $view;
         $title = ['403' => 'Access denied', '404' => 'Page not found', '401' => 'Login required', '500' => 'Something went wrong'][$view];
         try {
             ob_start();

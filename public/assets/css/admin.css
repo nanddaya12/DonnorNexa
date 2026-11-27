@@ -1,0 +1,357 @@
+/* ==========================================================================
+   DonorNexa - Administrator Governance, System Settings & Audit Styles
+   ========================================================================== */
+
+.settings-field-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.setting-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--ink-900);
+  margin-bottom: 0.25rem;
+}
+
+.setting-key-code {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--ink-500);
+  background: #f1f5f9;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-xs);
+}
+
+.count-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: #f1f5f9;
+  color: var(--ink-700);
+}
+
+.count-hospitals {
+  background: var(--sky-soft);
+  color: var(--sky);
+}
+
+.count-donors {
+  background: var(--emerald-soft);
+  color: var(--emerald);
+}
+
+.province-tag {
+  font-size: 0.82rem;
+  color: var(--ink-500);
+  font-weight: 600;
+}
+
+.logout-icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex-shrink: 0;
+}
+
+.inline-form {
+  display: inline;
+  margin: 0;
+}
+
+
+
+/* Page Headers & Views */
+.admin-header-card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-line);
+  box-shadow: var(--shadow-sm);
+  padding: 1.75rem 2rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.page-header-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.page-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.emergencies-page {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.filter-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--ink-500);
+}
+
+
+
+/* Avatar & Badges */
+.blood-badge-avatar {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+}
+
+.avatar-request {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: var(--radius-md);
+  background: var(--primary-soft);
+  color: var(--primary);
+  display: grid;
+  place-items: center;
+}
+
+.input-disabled {
+  background: #f1f5f9 !important;
+  color: var(--ink-500) !important;
+  cursor: not-allowed;
+}
+
+/* Admin Details */
+.wide-chart {
+  grid-column: span 2;
+}
+
+@media (max-width: 900px) {
+  .wide-chart {
+    grid-column: span 1;
+  }
+}
+
+.small-table {
+  font-size: 0.88rem;
+}
+
+.old-state {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.new-state {
+  background: #dcfce7;
+  color: #166534;
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.setting-desc-wrap {
+  color: var(--ink-600);
+  font-size: 0.88rem;
+  max-width: 520px;
+}
+
+.setting-input-wrap {
+  min-width: 180px;
+}
+
+.email-text {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--ink-600);
+}
+
+
+
+/* ==========================================================================
+   Admin Console & Charts
+   ========================================================================== */
+
+.admin-stats .stat-card {
+  padding: 1.15rem;
+}
+
+.chart-box {
+  padding: 1.5rem;
+  margin: 0;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.chart-header figcaption {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink-900);
+}
+
+.chart-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-pill);
+  background: var(--border-subtle);
+  color: var(--ink-600);
+}
+
+.badge-live {
+  background: var(--emerald-soft);
+  color: var(--emerald);
+  border: 1px solid var(--emerald-border);
+}
+
+.canvas-wrap {
+  max-height: 280px;
+  position: relative;
+}
+
+.canvas-wrap.wide-canvas {
+  max-height: 320px;
+}
+
+.chart-footer-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.sync-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--emerald);
+}
+
+/* Admin Quick Action Cards */
+.quick-admin-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.admin-quick-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration) var(--ease);
+}
+
+.admin-quick-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--purple-border);
+  box-shadow: var(--shadow-md);
+}
+
+.quick-card-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.quick-card-body strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--ink-900);
+}
+
+.quick-card-body span {
+  font-size: 0.82rem;
+  color: var(--ink-500);
+}
+
+.quick-card-arrow {
+  margin-left: auto;
+  font-size: 1.25rem;
+  color: var(--ink-300);
+  transition: transform var(--duration) var(--ease);
+}
+
+.admin-quick-card:hover .quick-card-arrow {
+  transform: translateX(4px);
+  color: var(--purple);
+}
+
+/* Security Audit Table specific */
+.code-action {
+  font-family: var(--font-mono);
+  background: var(--border-subtle);
+  border: 1px solid var(--border-line);
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-xs);
+  font-size: 0.82rem;
+  color: var(--purple);
+}
+
+.entity-badge {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-700);
+}
+
+.ip-mono {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink-500);
+}
+
+.state-val {
+  font-size: 0.82rem;
+  font-family: var(--font-mono);
+}
+
+.btn-pdf-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--sky);
+}
+
+.pdf-icon-inline {
+  width: 1rem;
+  height: 1rem;
+}
+

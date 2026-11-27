@@ -36,6 +36,7 @@ abstract class BaseController
         $unread = $authUser ? (new NotificationRepository())->unreadCount($authUser->id) : 0;
         $messages = Session::messages();
         $errors = $data['errors'] ?? [];
+        $currentView = $view;
         extract($data, EXTR_SKIP);
 
         ob_start();
